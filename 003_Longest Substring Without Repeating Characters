@@ -1,0 +1,42 @@
+＃my code
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        re = []
+        max1 = 0
+        if len(s)<2:
+            return len(s)
+
+        for i in range(len(s)):
+            re = []
+            for j in range(len(s) - i):
+                if s[i+j] not in re:
+                    re.append(s[i+j])
+                else:
+                    if len(re)>max1:
+                        max1 = len(re)
+                    break
+                if i+j == len(s) - 1:
+                    if len(re) > max1:
+                        max1 = len(re)
+                        return max1
+        return max1
+        
+#better  code
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        d = {}
+        cur =0
+        cur_length = 0
+        longest = 0
+
+        for index ,i in enumerate(s):
+            if i in d and d[i] >= cur:
+                longest = max(longest,cur_length)
+                cur_length = index - d[i]
+                cur = d[i]
+            else:
+                cur_length +=1
+            d[i] = index
+
+        return max(longest,cur_length)
