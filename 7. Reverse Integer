@@ -1,0 +1,21 @@
+#simple
+
+class Solution:
+    def reverse(self, x: int) -> int:
+        if abs(x) < 10:
+            return x
+        i = 0
+        if x>0:
+            fun = 1
+        else:
+            fun = -1
+            x = x*fun
+
+
+        x = str(x)
+        x = x[::-1]
+        while x[i] == '0':
+            i+=1
+        x = eval(x[i:])
+
+        return int(x*fun) if -2147483648 < int(x*fun) < 2147483647 else 0
