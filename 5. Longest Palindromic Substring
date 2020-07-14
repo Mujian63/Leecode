@@ -1,0 +1,55 @@
+#dp
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+        res = ''
+
+        for l in range(n):
+            for i in range(n):
+                j = i+l
+                if j >=len(s):
+                    break
+                if l == 0:
+                    dp[i][j] = True
+                elif l == 1:
+                    dp[i][j] =(s[i] == s[j])
+                else:
+                    dp[i][j] = (dp[i+1][j-1] and s[i] == s[j])
+                
+                if dp[i][j] and l+1 >len(res):
+                    res = s[i:j+1]
+        return res
+   
+   
+   
+   
+#better code
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        if n <=1:
+            return s
+
+        ss = '#' + '#'.join(s) + '#'
+        l = len(ss)
+        mx = 0
+        mid = 0
+        p = [1]*l
+
+        for i in range(l):
+            if i<mx:
+                p[i]  = min(p[2*mid-i],mx -i)
+            
+            while i-p[i] >=0 and i+p[i]<l and ss[i+p[i]] == ss[i-p[i]]:
+                p[i] +=1
+
+            if i+p[i]>mx:
+                mx = i+p[i]
+                mid = i 
+        
+        maxp = max(p)
+        ans = p.index(maxp)
+        maxp-=1
+
+        return ss[ans - maxp:ans+maxp+1].replace('#','')
