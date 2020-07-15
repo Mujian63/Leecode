@@ -1,0 +1,10 @@
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        x = str(x)
+        lens = len(x)
+        for i  in range(lens//2+1):
+            if x[i] == x[lens-1 - i]:
+                continue
+            else:
+                return False
+        return True
