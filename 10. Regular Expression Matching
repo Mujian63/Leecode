@@ -1,0 +1,15 @@
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        @lru_cache(None)  # 装饰符实现记忆化搜索，等价于Top-Down动态规划 记忆已经计算过的recur
+        def recur(i,j):
+            if j == len(p):
+                return i == len(s)
+            
+            first_match =( len(s)>i) and (p[j] == '.' or s[i] == p[j])
+
+            if len(p)>j+1 and p[j+1] == '*':
+                return recur(i,j+2) or (first_match and recur(i+1,j))
+            
+            return first_match and recur(i+1,j+1)
+
+        return recur(0,0)
