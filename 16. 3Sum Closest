@@ -1,0 +1,23 @@
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        nums = sorted(nums)
+        mins = 10000
+        res = 0
+        for i in range(len(nums)):
+            l = i+1
+            r = len(nums)-1
+            while l<r:
+                s = nums[i] + nums[l] + nums[r]
+                if s>target:
+                    if mins >s-target:
+                        mins = s-target
+                        res = s
+                    r -=1
+                elif s == target:
+                    return target
+                else:
+                    if mins > target-s:
+                        mins = target -s
+                        res = s
+                    l +=1
+        return res
