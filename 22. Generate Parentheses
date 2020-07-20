@@ -1,0 +1,15 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+        def dfs(cur_str,light,right):
+            if light == 0 and right == 0:
+                res.append(cur_str)
+                return
+            elif right<light:
+                return
+            if light>0:
+                dfs(cur_str+'(',light-1,right)
+            if right>0:
+                dfs(cur_str + ')',light,right -1)
+        dfs("",n,n)
+        return res
