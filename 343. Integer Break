@@ -1,0 +1,14 @@
+class Solution:
+    def integerBreak(self, n: int) -> int:
+        if n<3:
+            return 1
+        if n == 3:
+            return 2
+
+        count,tep = divmod(n,3)
+        if tep == 0:
+            return 3**count
+        elif tep == 1:
+            return 3**(count-1) *4
+        else:
+            return 3**count *2
