@@ -1,0 +1,22 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        if dividend == 0:
+            return 0
+        sign = dividend^divisor
+        if sign == 0:
+            return 1
+        else:
+            sign = int(sign / abs(sign))
+        
+        dividend = abs(dividend)
+        divisor = abs(divisor)
+
+        res = 0
+        for i in range(31,-1,-1):
+            if(divisor<<i <= dividend):
+                res += 1<<i
+                dividend -=  divisor<<i
+        res = res * sign
+        if res >2**31-1 or  res < -1*2**31:
+            return 2**31-1
+        return res
