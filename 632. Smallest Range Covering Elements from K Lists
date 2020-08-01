@@ -1,0 +1,22 @@
+# K-points
+
+class Solution:
+    def smallestRange(self, nums: List[List[int]]) -> List[int]:
+        klist = [0 for i in range(len(nums))]
+        kvallist = [nums[i][klist[i]] for i in range(len(nums))]
+        maxval = max(kvallist)
+        minval = min(kvallist)
+        while(1):
+            curmin = min(kvallist)
+            curmax = max(kvallist)
+            if curmax - curmin<maxval-minval:
+                maxval,minval = curmax,curmin
+
+            
+            row = kvallist.index(curmin)
+            if klist[row] != len(nums[row])-1: 
+                klist[row] +=1
+                kvallist[row] = nums[row][klist[row]]
+            else:
+                break
+        return [minval,maxval]
