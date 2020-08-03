@@ -1,0 +1,21 @@
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        if len(num1)>len(num2):
+            num1,num2 = num2,num1
+        num1,num2 = num1[::-1],num2[::-1]
+        carry  =0
+        res = ''
+        for i in range(len(num1)):
+            temp = int(num1[i]) +  int(num2[i]) +carry    
+            carry,rr = divmod(temp,10)
+            res = res + str(rr)
+        
+        for i in range(len(num1),len(num2)):
+            temp = int(num2[i]) +carry    
+            carry,rr = divmod(temp,10)
+            res = res + str(rr)
+        
+        if carry ==1:
+            return '1' + res[::-1]
+        else:
+            return res[::-1]
