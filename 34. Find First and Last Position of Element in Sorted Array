@@ -1,0 +1,27 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        res  = [-1,-1]
+        if len(nums) == 0:
+            return res
+
+        left,right = 0,len(nums)-1
+        while left<=right:
+            middle = (left + right) //2
+            if nums[middle] == target:
+                left = middle -1
+                right = middle+1
+                while(left>=0 and nums[left] == target):
+                        left -=1
+                while(right<=len(nums)-1 and nums[right] == target):
+                        right +=1
+                
+                res[0],res[1] = left +1,right-1
+                break
+
+            elif nums[middle]< target:
+                left = middle +1
+
+            else:right = middle-1
+        
+
+        return res
