@@ -1,0 +1,32 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        count = numCourses
+        matr = [[0] * numCourses for i in range(numCourses)]
+        indegress = [0] * numCourses
+
+        for f in prerequisites:
+            matr[f[0]][f[1]] = 1
+            indegress[f[0]] +=1
+        
+
+        queue = deque()
+        for i in range(numCourses):
+            if indegress[i] == 0:
+                queue.append(i)
+                indegress[i] = -1
+
+        
+        while queue:
+            temp = queue.popleft()
+
+            count -=1
+            for i in range(numCourses):
+                if matr[i][temp] == 1:
+                    indegress[i] -= 1
+
+            for i in range(numCourses):
+                if indegress[i] == 0:
+                    queue.append(i)
+                    indegress[i] = -1
+        
+        return count == 0
