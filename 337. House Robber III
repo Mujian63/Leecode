@@ -1,0 +1,20 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def rob(self, root: TreeNode) -> int:
+        def ff(root):
+            if not root:return[0,0]
+
+            left = ff(root.left)
+            right = ff(root.right)
+
+            v1 = left[1] + right[1] + root.val
+            v2 = max(left) + max(right)
+
+            return [v1,v2]
+        return max(ff(root))
