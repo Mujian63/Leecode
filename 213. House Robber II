@@ -1,0 +1,13 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return 0
+        elif len(nums)<=2:
+            return max(nums)       
+        def fundp(nums):
+            cur ,pre = 0,0
+            for f in nums:
+                pre,cur = cur,max(pre + f,cur)
+            return cur
+        
+        return max(fundp(nums[1:]),fundp(nums[:len(nums)-1]))
