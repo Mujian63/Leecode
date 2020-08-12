@@ -1,0 +1,26 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = []):
+        self.val = val
+        self.neighbors = neighbors
+"""
+
+class Solution:
+    visited = dict()
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        visited = dict()
+        def dfs(node):
+            if not node:
+                return
+            if node in visited:
+                return visited[node]
+
+            clone = Node(node.val,[])
+
+            visited[node] = clone
+
+            for i in node.neighbors:
+                clone.neighbors.append(dfs(i))
+            return clone
+        return dfs(node)
