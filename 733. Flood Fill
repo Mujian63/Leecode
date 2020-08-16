@@ -1,0 +1,22 @@
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        n,m = len(image),len(image[0])
+        def dfs(i,j,num):
+            if image[i][j] == num:
+                image[i][j] =  -1
+                if i>0:
+                    dfs(i-1,j,num)
+                if i<n-1:
+                    dfs(i+1,j,num)
+                if j>0:
+                    dfs(i,j-1,num)
+                if j<m-1:
+                    dfs(i,j+1,num) 
+        num = image[sr][sc]
+        dfs(sr,sc,num)
+
+        for i in range(n):
+            for j in range(m):
+                if image[i][j] == -1:
+                    image[i][j] = newColor
+        return image
