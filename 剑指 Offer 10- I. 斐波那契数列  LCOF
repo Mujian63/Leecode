@@ -1,0 +1,11 @@
+class Solution:
+    def fib(self, n: int) -> int:
+        cur = 1
+        pre = 0
+        if n == 0:
+            return pre
+        elif n==1:
+            return cur
+        for i in range(1,n):
+            cur,pre = pre+cur,cur
+        return cur % 1000000007
