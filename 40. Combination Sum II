@@ -1,0 +1,26 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates = sorted(candidates)
+        res = []
+        def back(candidates,cur,index):
+            if sum(cur) > target:
+                return
+            if sum(cur) ==  target:
+                if cur not in res:
+                    res.append(cur[:])
+                return
+            
+            for i in range(index,len(candidates)):
+                cur.append(candidates[i])
+                back(candidates,cur,i+1)
+                cur.pop()
+        back(candidates,[],0)
+        
+        
+        return res
+        
+        
+        
+        
+        
+#better 
