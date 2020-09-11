@@ -1,0 +1,72 @@
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        
+
+        def can_place(row,col,num):
+            if rows[row][num] == 1 or cols[col][num] ==1 or squares[(row//3)*3 + col // 3][num] == 1:
+                return False
+            else:
+                return True
+
+
+        def join_num(row,col,num):
+            rows[row][num] = 1
+            cols[col][num] = 1
+            squares[(row//3)*3 + col // 3][num] = 1
+            board[row][col] = str(num)
+
+        def remove_num(row,col,num):
+            rows[row][num] = 0
+            cols[col][num] = 0
+            squares[(row // 3 )*3 + col // 3][num] = 0
+            board[row][col] = '.'
+
+
+        def back(row,col,flag):
+            if row  == 9:
+                for i in range(9):
+                    temp = []
+                    for j in range(9):
+                        temp.append(board[i][j])
+                    res.append(temp)
+                flag  = True
+                return
+            
+            if board[row][col] !='.':
+                back(row + (col+1) //9,(col+1) %9,flag)
+            
+            else:
+                for num in range(1,10):
+                    if not can_place(row,col,num):
+                        continue
+                    
+                    join_num(row,col,num)
+                    
+                    back(row + (col+1) //9,(col+1) %9,flag)
+                    
+                    if flag:
+                        return
+                    
+                    remove_num(row,col,num)
+
+
+            
+
+        res = []
+        flags = False
+        rows = [[0 for i in range(10)] for i in range(9)]
+        cols = [[0 for i in range(10)] for i in range(9)]
+        squares = [[0 for i in range(10)] for i in range(9)]
+
+        for row in range(9):
+            for col in range(9):
+                if board[row][col] != '.':
+                    rows[row][int(board[row][col])] = 1
+                    cols[col][int(board[row][col])] = 1
+                    squares[(row // 3) * 3 + col // 3][int(board[row][col])] = 1
+                    
+        back(0,0,flags)
+        
