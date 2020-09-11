@@ -1,0 +1,20 @@
+#回溯
+
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        res = []
+        def back(cur,index):
+            if len(cur)> k or sum(cur)>n:
+                return 
+            
+            if len(cur) == k and sum(cur) == n:
+                res.append(cur[:])
+                return
+            
+            for i in range(index,10):
+                cur.append(i)
+                back(cur,i+1)
+                cur.pop()
+            
+        back([],1)
+        return res
