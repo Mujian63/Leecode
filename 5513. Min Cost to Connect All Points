@@ -1,0 +1,42 @@
+# Prim  最小生成树
+
+
+class Solution:
+    def minCostConnectPoints(self, points: List[List[int]]) -> int:
+        MAX = 10**9
+        n = len(points)
+        res = [0]
+        dp = [MAX for i in range(n)]
+        for i in range(1,n):
+            dp[i] = abs(points[i][0] - points[0][0]) + abs(points[i][1] - points[0][1])
+        
+
+
+        visited_point = [0]
+        use_point = [i for i in range(1,n)]
+        
+        def dfs(use_point,visited_point):
+            if len(use_point) == 0:
+                return
+            min_dis = MAX
+
+            for i in range(len(dp)):
+                if dp[i]<min_dis:
+                    min_dis = dp[i]
+                    cur_point = i
+            
+            res[0] += dp[cur_point]
+            visited_point.append(cur_point)
+            use_point.remove(cur_point)
+            dp[cur_point] = MAX
+
+            for i in use_point:
+                if abs(points[i][0] - points[cur_point][0]) + abs(points[i][1] - points[cur_point][1]) < dp[i]:
+                    dp[i] = abs(points[i][0] - points[cur_point][0]) + abs(points[i][1] - points[cur_point][1])
+
+            
+            print(res)
+            dfs(use_point,visited_point)
+        
+        dfs(use_point,visited_point)
+        return res[0]
