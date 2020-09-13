@@ -1,0 +1,16 @@
+class Solution:
+    def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[int]]) -> int:
+        get = {}
+        for x,y in pairs:
+            get[x] = y
+            get[y] = x
+        unhappy = set()
+        for x in range(n):
+            y = get[x]
+            for u in preferences[x][:preferences[x].index(y)]:
+                v = get[u]
+                if preferences[u].index(x)<preferences[u].index(v):
+                    unhappy.add(x)
+                    
+        
+        return len(unhappy)
