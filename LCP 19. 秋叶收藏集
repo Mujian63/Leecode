@@ -1,0 +1,17 @@
+class Solution:
+    def minimumOperations(self, leaves: str) -> int:
+        MAX = 10**9
+        dp = [0,MAX,MAX]
+        for pos,s in enumerate(leaves):
+            temp=[MAX,MAX,MAX]
+            temp[0] = dp[0] + (1 if s == 'y' else  0)
+            if pos >0:
+                temp[1] = min(temp[1],dp[0] + (1 if s == 'r' else 0))
+            if pos >1:
+                temp[2] = min(temp[2],dp[1] + (1 if s == 'y' else 0))
+
+            temp[1] = min(temp[1],dp[1] + (1 if s == 'r' else 0))
+            temp[2] = min(temp[2],dp[2] + (1 if s == 'y' else 0))
+            dp = temp
+        
+        return dp[2]
