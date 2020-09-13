@@ -1,0 +1,45 @@
+class Solution:
+    def numSpecial(self, mat: List[List[int]]) -> int:
+        rows = [0 for i in range(len(mat))]
+        cols = [0 for j in range(len(mat[0]))]
+        
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                if mat[i][j] == 1:
+                    rows[i] +=1
+                    cols[j] +=1
+        
+        res = 0
+        row = []
+        col = []
+        for i in range(len(rows)):
+            if rows[i] == 1:
+                row.append(i)
+        for j in range(len(cols)):
+            if cols[j] ==1:
+                col.append(j)
+        
+        for x in row:
+            for y in col:
+                if mat[x][y] ==1:
+                    res+=1
+        return res
+        
+        
+        
+class Solution:
+    def numSpecial(self, mat: List[List[int]]) -> int:
+        rows = [0 for i in range(len(mat))]
+        cols = [0 for i in range(len(mat[0]))]
+
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                if mat[i][j] ==1:
+                    rows[i]+=1
+                    cols[j] +=1
+        res = 0
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                if mat[i][j] == 1 and rows[i] == 1 and cols[j] == 1:
+                    res+=1
+        return res  
