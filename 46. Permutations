@@ -1,0 +1,17 @@
+#回溯
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        def back(num,temp):
+            
+            if not num:
+                print(temp)
+                res.append(temp)
+                return
+                
+            for i in range(len(num)):
+                back(num[:i] + num[i+1:], temp + [num[i]])
+            
+        
+        back(nums,[])
+        return res
