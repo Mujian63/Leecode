@@ -1,0 +1,42 @@
+#暴力 回溯
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        nums = sorted(nums)
+        res = []
+
+        def back(nums,temp):
+            
+            if not nums:
+                print(temp)
+                if len(res) == 0 or temp not in res:
+                    res.append(temp)
+                    return 
+                else:
+                    return
+            
+            for i in range(len(nums)):
+                back(nums[:i] + nums[i+1:],temp + [nums[i]])
+            
+        back(nums,[])
+        return res
+        
+#回溯  + 剪枝
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        nums = sorted(nums)
+        res = []
+        visited = [False for  i in range(len(nums))]
+        def back(nums,temp):
+            if not nums:
+                print(temp)
+                res.append(temp)
+                return 
+
+            
+            for i in range(len(nums)):
+                if i > 0 and nums[i] == nums[i - 1]:
+                    continue
+                back(nums[:i] + nums[i+1:],temp + [nums[i]])
+            
+        back(nums,[])
+        return res
