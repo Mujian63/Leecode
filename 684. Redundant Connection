@@ -1,0 +1,21 @@
+class Solution:
+    def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+        father  =[i for i in range(len(edges) + 1)]
+        
+        def findfather(num):
+            while father[num] != num:
+                num = father[num]
+            return num
+        
+        def is_family(x,y):
+            xx = findfather(x)
+            yy = findfather(y)
+            if xx==yy:
+                return True
+            else:
+                father[yy] = xx
+                return False
+        
+        for i,j in edges:
+            if is_family(i,j):
+                return [i,j]
