@@ -1,0 +1,11 @@
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        def f(N):
+            if N == 0:
+                return 1
+            
+            y = f(N//2)
+
+            return y*y if N%2 == 0 else y*y*x
+        
+        return f(n) if n>=0 else 1/f(abs(n))
