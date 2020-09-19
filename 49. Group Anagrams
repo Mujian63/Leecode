@@ -1,0 +1,14 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        temp_dict = dict()
+        for f in strs:
+            temp = "".join(sorted(f))
+            if temp not in temp_dict:
+                temp_dict[temp] = [f]
+            else:
+                temp_dict[temp].append(f)
+        
+        res = []
+        for ff in temp_dict.values():
+            res.append(ff)
+        return res
