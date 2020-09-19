@@ -1,0 +1,22 @@
+class Solution:
+    def paintingPlan(self, n: int, k: int) -> int:
+        temp_c = [0,n,n*(n-1)/2,n*(n-1)*(n-2)/6,n*(n-1)*(n-2)*(n-3)/24,n*(n-1)*(n-2)*(n-3)*(n-4)/120,n*(n-1)*(n-2)*(n-3)*(n-4)*(n-5)/720]
+        
+        if k == 0:
+            return 1
+        if n>k:
+            return 0
+
+        
+        if n*n == k :
+            return 1
+        
+        res=0
+        for x in range(0,n+1):
+            for y in range(0,n+1):
+                if x*n+y*n -x*y == k:
+                    res  = res + max(1,temp_c[x]) * max(1,temp_c[y])
+                    
+
+
+        return int(res) 
