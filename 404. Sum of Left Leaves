@@ -1,0 +1,17 @@
+class Solution:
+    def sumOfLeftLeaves(self, root: TreeNode) -> int:
+        self.res = 0
+        def dfs(nood):
+
+            if not nood:
+                return
+
+            if nood.left:
+                self.res += nood.left.val
+                dfs(nood.left)
+
+            if nood.right:
+                dfs(nood.right)
+        
+        dfs(root)
+        return self.res
