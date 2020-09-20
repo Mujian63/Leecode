@@ -1,0 +1,23 @@
+class Solution:
+    def maxSumRangeQuery(self, nums: List[int], requests: List[List[int]]) -> int:
+        temp_flag = [0 for i in range(len(nums)+1)]
+        for r in requests:
+            temp_flag[r[0]] +=1
+            temp_flag[r[1]+1] -=1
+
+        cur = 0
+        sum_temp = [0 for i in range(len(nums))]
+        for i in range(len(nums)):
+            cur += temp_flag[i]
+            sum_temp[i] = cur
+
+        nums = sorted(nums,reverse = True)
+        sum_temp = sorted(sum_temp,reverse = True)
+
+        res = 0
+
+        for i in range(len(nums)):
+            if nums[i] ==0:
+                break
+            res += nums[i] * sum_temp[i]
+        return res%(10**9+7)
