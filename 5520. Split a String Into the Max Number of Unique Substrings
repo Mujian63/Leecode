@@ -1,0 +1,13 @@
+class Solution:
+    def maxUniqueSplit(self, s: str) -> int:
+        def back(s,temp):
+            if not s:
+                if len(set(temp)) == len(temp):
+                    self.ans = max(self.ans, len(temp))
+                    return
+            for i in range(len(s)):
+                back(s[i+1:],temp + [s[:i+1]])
+        
+        self.ans = 0
+        back(s,[])
+        return self.ans
