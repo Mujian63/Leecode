@@ -1,0 +1,12 @@
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        a_point,b_point = 0,len(s)-1
+        while(a_point<b_point):
+            s[a_point],s[b_point] = s[b_point],s[a_point]
+            a_point+=1
+            b_point-=1
+        
+        return
