@@ -1,0 +1,12 @@
+class Solution:
+    def maxDepth(self, s: str) -> int:
+        temp = 0 
+        res = 0
+        #s_temp = []
+        for f in s:
+            if f =="(":
+                temp +=1
+                res = max(res,temp)
+            elif f == ')':
+                temp-=1
+        return res
