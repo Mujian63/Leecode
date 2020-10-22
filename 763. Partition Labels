@@ -1,0 +1,22 @@
+class Solution:
+    def partitionLabels(self, S: str) -> List[int]:
+        temp_dict = dict()
+        for i in range(len(S)):
+                temp_dict[S[i]] =  i
+
+        res = []
+        cur = 0
+        while(cur <len(S)):
+            tempmax = temp_dict[S[cur]]
+            i = cur
+            while i < tempmax:
+
+                if temp_dict[S[i]]>tempmax:
+                    tempmax = temp_dict[S[i]]
+                
+                i += 1
+            res.append(tempmax - cur + 1)
+            cur  = tempmax+1
+            
+        return res
+        
