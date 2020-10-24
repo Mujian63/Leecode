@@ -1,0 +1,36 @@
+class Solution:
+    def videoStitching(self, clips: List[List[int]], T: int) -> int:
+        temp_dict = {}
+        end_time = 0
+        for f in clips:
+            if f[0] not in temp_dict:
+                temp_dict[f[0]] = f[1]
+                end_time  = max(end_time,f[1])
+            
+            else:
+                temp_dict[f[0]] = max(f[1],temp_dict[f[0]])
+                end_time  = max(end_time,f[1])
+        
+        if end_time < T or 0 not in temp_dict:
+            return -1
+        
+        res = 1
+
+        cur = temp_dict[0]
+        pre = 0
+        
+        while cur < T:
+            temp_max = cur
+            for i in range(pre+1,cur + 1):
+                if i in temp_dict:
+                    temp_max = max(temp_dict[i],temp_max)  
+
+            if temp_max == cur:
+                return -1
+
+
+            pre = cur 
+            cur = temp_max
+            res +=1
+
+        return res
