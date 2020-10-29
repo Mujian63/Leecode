@@ -1,0 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        self.res = 0
+        if not root:
+            return self.res
+        def getsum(nood,cur_sum):
+            cur_sum = cur_sum*10+nood.val
+            if nood.left:
+                getsum(nood.left,cur_sum)
+            if nood.right:
+                getsum(nood.right,cur_sum)
+            if not(nood.left or nood.right):
+                print(cur_sum)
+                self.res += cur_sum
+                return 
+
+        getsum(root,0)
+        return self.res
