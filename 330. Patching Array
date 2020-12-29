@@ -1,0 +1,14 @@
+class Solution:
+    def minPatches(self, nums: List[int], n: int) -> int:
+        count = 0
+        x = 1
+        index = 0
+        length = len(nums)
+        while x <= n:
+            if index<length and nums[index] <= x:
+                x += nums[index]
+                index +=1
+            else:
+                x <<= 1
+                count +=1
+        return count
