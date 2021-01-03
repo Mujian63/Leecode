@@ -1,0 +1,22 @@
+class Solution:
+    def countPairs(self, deliciousness: List[int]) -> int:
+        a_dict = dict()
+        for f in deliciousness:
+            if f in a_dict:
+                a_dict[f] +=1
+            else:
+                a_dict[f] = 1
+        
+        res = 0
+        print (a_dict)
+        for f in a_dict:
+            temp = [2 ** i - f  for i in range(22) if 2**i-f > f and 2**i -f in a_dict]
+            for ff in temp:
+                res += a_dict[f] * a_dict[ff]
+                
+            if 2*f in [2**i for i in range(22)] and a_dict[f] >= 2:
+                res += ((a_dict[f] * (a_dict[f] - 1)) // 2)
+            
+            res = res % (10**9 + 7)
+                
+        return res
