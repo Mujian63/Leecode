@@ -1,0 +1,17 @@
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        def find(index):
+            if parent[index] != index:
+                parent[index] = find(parent[index])
+            return parent[index]
+        def union(index1,index2):
+            parent[find(index1)] = find(parent[index2])
+        
+        convinces = len(isConnected)
+        parent  = [i for i in range(len(isConnected))]
+
+        for i in range(len(isConnected)):
+            for j in range(i+1,len(isConnected)):
+                if isConnected[i][j] == 1:
+                    union(i,j)
+        return len([0 for i in range(len(parent)) if parent[i] == i])
